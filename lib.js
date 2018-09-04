@@ -1,5 +1,6 @@
 function sumarDosNumeros(primerNumero, segundoNumero){
     let resultado = primerNumero + segundoNumero;
+    debugger;
     return resultado;
 }
 
