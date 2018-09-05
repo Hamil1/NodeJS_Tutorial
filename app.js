@@ -3,6 +3,7 @@ const lib = require('./lib.js');
 const request = require('request');
 const https = require('https');
 
+let username = "Hamil1";
 let CHROME_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36";
 
 let options = {
@@ -12,12 +13,20 @@ let options = {
     headers: {'user-agent': CHROME_USER_AGENT}
 }
 
-https.request(options, function(response){
-    let body;
+let consulta = https.request(options, function(response){
+    let body = '';
     response.on('data', (out) => {
-        body += out;
+        body += out;    
+    });
+
+    response.on('end',function(out){
+        let json = JSON.parse(body);
+        console.log(json);
     });
 });
 
-console.log(https);
-debugger;
+consulta.on('error', function(error){
+    console.log('Este es el error: ' + error);
+});
+
+consulta.end();
