@@ -1,13 +1,21 @@
-const cpu = require('os');
-const lib = require('./lib.js');
-const request = require('request');
-const https = require('https');
-const fetch = require('node-fetch');
+var express = require('express');
+var app = express();
 
-fetch('https://api.github.com/users/Hamil1').then(function(data){
-    console.log(data);
-    return data.json();
-}).then(function(json){
-    console.log('Este es el resultado de la consulta: ' + JSON.stringify(json));
-    debugger;
+app.use(function(req, res, next){
+    console.log("Middleware 1");
+    next();
 });
+
+app.get("/", function(req, res, next){
+    res.send("Esta entrando al metodo");
+    console.log("Este es el middleware");
+    next();
+});
+
+app.use(function(req, res, next){
+    console.log("Middleware 2");
+    next();
+});
+
+app.listen(3000);
+
