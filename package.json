@@ -1,0 +1,27 @@
+{
+  "name": "dependencias",
+  "version": "1.0.0",
+  "description": "Aquí es donde se guardan las dependencias",
+  "main": "app.js",
+  "dependencies": {
+    "https": "^1.0.0",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hamil1/NodeJS_Tutorial.git"
+  },
+  "keywords": [
+    "NodeJS_Tutorial"
+  ],
+  "author": "Victor H. Diaz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hamil1/NodeJS_Tutorial/issues"
+  },
+  "homepage": "https://github.com/Hamil1/NodeJS_Tutorial#readme"
+}
