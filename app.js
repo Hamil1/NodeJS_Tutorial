@@ -18,7 +18,7 @@ let personas = [
 
 ];
 
-let titulo = "Hamil te puedes sentir orgulloso!";
+let titulo = "Hamil!";
 app.set('view engine', 'hbs');
 
 app.get('/', function(req, res){
