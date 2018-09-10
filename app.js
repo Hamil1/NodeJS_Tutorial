@@ -1,21 +1,28 @@
-var express = require('express');
-var app = express();
+const hbs = require('hbs');
+const express = require('express');
+const app = express();
 
-app.use(function(req, res, next){
-    console.log("Middleware 1");
-    next();
-});
+let personas = [
+    {
+        id: 1,
+        nombre: "Carlos"
+    },
+    {
+        id: 2,
+        nombre: "Jose"
+    },
+    {
+        id: 3,
+        nombre: "Miguel"
+    }
 
-app.get("/", function(req, res, next){
-    res.send("Esta entrando al metodo");
-    console.log("Este es el middleware");
-    next();
-});
+];
 
-app.use(function(req, res, next){
-    console.log("Middleware 2");
-    next();
+let titulo = "Hamil te puedes sentir orgulloso!";
+app.set('view engine', 'hbs');
+
+app.get('/', function(req, res){
+    res.render('index.hbs', {personas: personas, titulo: titulo});
 });
 
 app.listen(3000);
-
