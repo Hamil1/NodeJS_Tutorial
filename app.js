@@ -2,27 +2,16 @@ const hbs = require('hbs');
 const express = require('express');
 const app = express();
 
-let personas = [
-    {
-        id: 1,
-        nombre: "Carlos"
-    },
-    {
-        id: 2,
-        nombre: "Jose"
-    },
-    {
-        id: 3,
-        nombre: "Miguel"
-    }
-
-];
-
-let titulo = "Hamil!";
-app.set('view engine', 'hbs');
-
-app.get('/', function(req, res){
-    res.render('index.hbs', {personas: personas, titulo: titulo});
-});
+app.get('/user/:id', function (req, res, next) {
+    console.log('ID:', req.params.id);
+    next();
+  }, function (req, res, next) {
+    res.send('User Info');
+  });
+  
+  // handler for the /user/:id path, which prints the user ID
+  app.get('/user/:id', function (req, res, next) {
+    res.end(req.params.id);
+  });
 
 app.listen(3000);
