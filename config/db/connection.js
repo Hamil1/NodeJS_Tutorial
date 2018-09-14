@@ -1,4 +1,6 @@
 const Sequelize = require('sequelize');
+const moment = require('moment');
+const util = require('util');
 
 sequelize = new Sequelize('sequelize_nodejs','root','',{host: 'localhost', dialect: 'mysql', operatorsAliases: false});
 
@@ -11,18 +13,7 @@ function test(){
     });
 }
 
-function crearPersonas(){
-    let personas = sequelize.define('personas',{
-        nombre: Sequelize.STRING,
-        apellido: Sequelize.STRING,
-        direccion: Sequelize.TEXT
-    });
-
-    console.log('Esta pasando');
-}
-
 module.exports = {
     connection: sequelize,
-    test: test,
-    crearPersonas: crearPersonas
+    test: test
 };

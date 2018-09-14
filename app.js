@@ -9,10 +9,11 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-const db = require('./config/db/connection');
+const db = require('./config/db/connection');//conexion de la base de datos
+const personas = require('./models/personas');//modelo personas
 
 app.get('/',function(req, res, next){
-  db.crearPersonas();
+  db.test();
   next();
 });
 
