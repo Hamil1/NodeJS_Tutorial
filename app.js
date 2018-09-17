@@ -13,7 +13,10 @@ const db = require('./config/db/connection');//conexion de la base de datos
 const personas = require('./models/personas');//modelo personas
 
 app.get('/',function(req, res, next){
-  db.test();
+  // personas.insertarPersonas('Victor Hamil', 'Diaz De La Cruz', 'C Respaldo San Juan esq Imbert');
+  // personas.traerNombre();
+  // personas.actualizarInstancia(1);
+  personas.eliminarInstancia(2);
   next();
 });
 

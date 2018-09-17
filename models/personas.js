@@ -1,15 +1,16 @@
-const Sequelize = require('../config/db/connection');
+const conn = require('../config/db/connection');
 
-const sequelize = Sequelize.connection;
+const connection = conn.connection;
+const Sequelize = conn.sequelize;
 
-let personas = sequelize.define('personas',{ //Ponemos esto aquí por si la tabla no existe la pueda crear
+let personas = connection.define('personas',{ //Ponemos esto aquí por si la tabla no existe la pueda crear
     nombre: Sequelize.STRING,
     apellido: Sequelize.STRING,
     direccion: Sequelize.TEXT
 });
 
 function insertarPersonas(paramNombre, paramApellido, paramDireccion){
-    sequelize.sync().then(() => {
+    connection.sync().then(() => {
         personas.create({
             nombre: paramNombre,
             apellido: paramApellido,
@@ -29,7 +30,32 @@ function traerRegistros(){
         });
 }
 
+function actualizarInstancia(id){
+    personas.update({nombre: "Joselito", apellido: "Ramirez"},{
+        where: {
+            id: id
+        }
+    });
+}
+
+function traerNombre(){
+    personas.findOne().then((instancia)=>{
+        console.log(instancia.nombre);
+    });
+}
+
+function eliminarInstancia(id){
+    personas.destroy({
+        where: {
+            id: id
+        }
+    });
+}
+
 module.exports = {
     insertarPersonas: insertarPersonas,
-    traerPersonas: traerRegistros
+    traerPersonas: traerRegistros,
+    traerNombre: traerNombre,
+    actualizarInstancia: actualizarInstancia,
+    eliminarInstancia: eliminarInstancia
 };
