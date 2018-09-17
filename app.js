@@ -3,22 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const db = require('./config/db/connection');//conexion de la base de datos
+const persona = require('./controllers/persona');//controlador personas
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const util = require('util');
 
 var app = express();
 
-const db = require('./config/db/connection');//conexion de la base de datos
-const personas = require('./models/personas');//modelo personas
-
-app.get('/',function(req, res, next){
-  // personas.insertarPersonas('Victor Hamil', 'Diaz De La Cruz', 'C Respaldo San Juan esq Imbert');
-  // personas.traerNombre();
-  // personas.actualizarInstancia(1);
-  personas.eliminarInstancia(2);
-  next();
-});
+app.get('/traerPersona/:id',persona.traerNombre);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
