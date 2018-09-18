@@ -9,9 +9,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const util = require('util');
 
-var app = express();
 
-app.get('/traerPersona/:id',persona.traerNombre);
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,10 +25,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+
+const rutaPersona = require('./routes/persona');
+app.use('/', rutaPersona);
+
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+// app.use(function(req, res, next) {
+//   next(createError(404));
+// });
 
 // error handler
 app.use(function(err, req, res, next) {
