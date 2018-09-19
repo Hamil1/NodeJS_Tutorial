@@ -66,6 +66,7 @@ function consultarPersonaJCE(req, res){
             'Connection': 'keep-alive',
             'Host': 'dataportal.jce.gob.do',
             'Upgrade-Insecure-Requests': '1',
+            'content-type': 'text/xml; charset=utf-8',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
         }
     }, (err, response, body)=>{
