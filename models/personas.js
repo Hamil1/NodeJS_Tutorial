@@ -10,5 +10,6 @@ let personas = connection.define('personas',{ //Ponemos esto aquí por si la tab
 });
 
 module.exports = {
-    personas
+    personas,
+    connection
 };

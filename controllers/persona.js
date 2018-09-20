@@ -7,6 +7,7 @@ fs = require('fs'),
 http = require('http'),
 
 personas = person.personas;
+connection = person.connection;
 
 function insertarPersonas(req, res, next){
     connection.sync().then(() => {
@@ -84,11 +85,33 @@ function parseXmlAndResponse(data, res){
     });
 }
 
+function consultarPersonaDBLocal(req, res){
+    connection.query(`SELECT * FROM personas WHERE id = ${req.params.id}`).then((query)=>{
+        console.log(`Resultado del query: \n ${JSON.stringify(query, null, 3)}`);
+        res.send(JSON.stringify(query, null, 3));
+    });
+}
+
+function insertarPersonaDBLocal(req, res){
+    connection.query(`INSERT INTO personas (nombre, apellido, direccion, createdAt, updatedAt) VALUES ('${req.params.nombre}', 
+        '${req.params.apellido}',
+        '${req.params.direccion}',
+        ${new Date().getTime()},
+        ${new Date().getTime()})`).then((resultado) =>{
+            res.send(`Inserción realizada con éxito -> ${resultado}`);
+        }
+    ).catch((error)=>{
+        res.send(`Problemas con la inserción ${error.message}`);
+    });
+}
+
 module.exports = {
     insertarPersonas,
     traerRegistros,
     traerNombre,
     actualizarInstancia,
     eliminarInstancia,
-    consultarPersonaJCE
+    consultarPersonaJCE,
+    consultarPersonaDBLocal,
+    insertarPersonaDBLocal
 }
