@@ -105,6 +105,17 @@ function insertarPersonaDBLocal(req, res){
     });
 }
 
+function updatePersonaDBLocal(req, res){
+    connection.query(`UPDATE personas SET nombre = '${req.params.nombre}',
+     apellido = '${req.params.apellido}',
+     direccion = '${req.params.direccion}',
+     updatedAt = '${new Date().getTime()}`).then((resultado)=>{
+         res.send(`El registro se actualizó correctamente -> ${resultado.message}`);
+     }).catch((resultado)=>{
+         
+     });
+}
+
 module.exports = {
     insertarPersonas,
     traerRegistros,
