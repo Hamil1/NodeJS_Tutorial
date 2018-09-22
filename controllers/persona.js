@@ -88,6 +88,8 @@ function parseXmlAndResponse(data, res){
 function consultarPersonaDBLocal(req, res){
     connection.query(`SELECT * FROM personas WHERE id = ${req.params.id}`).then((query)=>{
         console.log(`Resultado del query: \n ${JSON.stringify(query, null, 3)}`);
+        console.log(`Fecha de Noviembre -> ${new Date(2018, 10, 5, 13).getTime()} \n 
+        Fecha de hoy -> ${new Date().getTime()}`);
         res.send(JSON.stringify(query, null, 3));
     });
 }
@@ -109,12 +111,15 @@ function updatePersonaDBLocal(req, res){
     connection.query(`UPDATE personas SET nombre = '${req.params.nombre}',
      apellido = '${req.params.apellido}',
      direccion = '${req.params.direccion}',
-     updatedAt = '${new Date().getTime()}`).then((resultado)=>{
+     updatedAt = '${new Date().getTime()}'
+     WHERE id = ${req.params.id}`).then((resultado)=>{
          res.send(`El registro se actualizó correctamente -> ${resultado.message}`);
-     }).catch((resultado)=>{
-         
+     }).catch((error)=>{
+         res.send(`Problemas con el Update -> ${error.message}`);
      });
 }
+
+
 
 module.exports = {
     insertarPersonas,
@@ -124,5 +129,6 @@ module.exports = {
     eliminarInstancia,
     consultarPersonaJCE,
     consultarPersonaDBLocal,
-    insertarPersonaDBLocal
+    insertarPersonaDBLocal,
+    updatePersonaDBLocal
 }
