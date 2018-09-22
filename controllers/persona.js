@@ -86,6 +86,12 @@ function parseXmlAndResponse(data, res){
 }
 
 function consultarPersonaDBLocal(req, res){
+    let fechaHoy = new Date().getTime();
+    let fecha = new Date(2018, 8, 23, 19, 27).getTime();
+    const diasMiliseconds = fecha - fechaHoy;
+    const dias = Math.trunc((diasMiliseconds / (1000*60*60*24)));
+    console.log(`Estos son los días de diferencia ${dias}`);
+
     connection.query(`SELECT * FROM personas WHERE id = ${req.params.id}`).then((query)=>{
         console.log(`Resultado del query: \n ${JSON.stringify(query, null, 3)}`);
         console.log(`Fecha de Noviembre -> ${new Date(2018, 10, 5, 13).getTime()} \n 
